@@ -5,36 +5,14 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "graphics_util.h"
+#include "game.h"
 
-static unsigned int vao, vbo, ebo, shader_program;
+static unsigned int vao, shader_program;
 static unsigned int grass_texture;
-
-static std::vector<float> vertices;
-static std::vector<unsigned int> indices;
 
 // Returns the shader program id
 unsigned int get_shader_program() {
 	return shader_program;
-}
-
-// Draws a rectangle
-void draw_face(Face face) {
-	for (int i = 0; i < 4; i++) {
-		vertices.push_back(face.vertices[i].x);
-		vertices.push_back(face.vertices[i].y);
-		vertices.push_back(face.vertices[i].z);
-
-		vertices.push_back(face.texture_coords[i].x);
-		vertices.push_back(face.texture_coords[i].y);
-	}
-
-	int offset = (indices.size() / 6) * 4;
-	indices.push_back(offset);
-	indices.push_back(offset + 1);
-	indices.push_back(offset + 3);
-	indices.push_back(offset + 1);
-	indices.push_back(offset + 2);
-	indices.push_back(offset + 3);
 }
 
 // Sets up the shaders, buffers, and more
@@ -53,18 +31,6 @@ void render_setup() {
 
 	// Textures
 	grass_texture = create_texture("grass.png");
-
-	// VAO
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	// VBO
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-	// EBO
-	glGenBuffers(1, &ebo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
 	// Vertex positon
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float)*5, (void*)0);
@@ -91,13 +57,8 @@ void render_game() {
 	glUseProgram(shader_program);
 	glBindVertexArray(vao);
 
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices.front(), GL_DYNAMIC_DRAW);
-	//glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(float), &vertices.front());
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices.front(), GL_DYNAMIC_DRAW);
-	//glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indices.size() * sizeof(unsigned int), &indices.front());
-
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+	std::vector<Chunk> chunks = get_chunks();
+	for (int i = 0; i < chunks.size(); i++) {
+		chunks[i].Draw();
+	}
 }

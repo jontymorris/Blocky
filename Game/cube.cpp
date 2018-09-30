@@ -1,5 +1,7 @@
 #include "cube.h"
 
+Cube::Cube() : Cube::Cube(0, 0, 0) {}
+
 Cube::Cube(float x, float y, float z) {
 	position = glm::vec3(x, y, z);
 }

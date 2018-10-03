@@ -37,10 +37,11 @@ void render_setup() {
 	glBindVertexArray(vao);
 	
 	// Projection matrix
-	glm::mat4 ortho = glm::ortho(-8.0f, 8.0f, -4.5f, 4.5f, -5.0f, 5.0f);
-	unsigned int ortho_location = glGetUniformLocation(shader_program, "projection");
+	glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), (float)1280 / (float)720, -5.0f, 5.0f);
+	
+	unsigned int projection_location = glGetUniformLocation(shader_program, "projection");
 	glUseProgram(shader_program);
-	glUniformMatrix4fv(ortho_location, 1, GL_FALSE, glm::value_ptr(ortho));
+	glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection_matrix));
 }
 
 // Render the game

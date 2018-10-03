@@ -31,15 +31,11 @@ void render_setup() {
 
 	// Textures
 	grass_texture = create_texture("grass.png");
-
-	// Vertex positon
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float)*5, (void*)0);
-	glEnableVertexAttribArray(0);
-
-	// Texture coordinate
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(sizeof(float)*3));
-	glEnableVertexAttribArray(1);
-
+	
+	// Generate the VAO
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	
 	// Projection matrix
 	glm::mat4 ortho = glm::ortho(-8.0f, 8.0f, -4.5f, 4.5f, -5.0f, 5.0f);
 	unsigned int ortho_location = glGetUniformLocation(shader_program, "projection");
@@ -57,6 +53,7 @@ void render_game() {
 	glUseProgram(shader_program);
 	glBindVertexArray(vao);
 
+	// draw all of the chunks
 	std::vector<Chunk> chunks = get_chunks();
 	for (int i = 0; i < chunks.size(); i++) {
 		chunks[i].Draw();

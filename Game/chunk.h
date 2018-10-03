@@ -4,6 +4,8 @@
 #include <glm/vec3.hpp>
 #include "cube.h"
 
+#define CHUNK_SIZE 16
+
 class Chunk {
 public:
 	Chunk();
@@ -13,5 +15,5 @@ public:
 private:
 	unsigned int vbo, ebo;
 	glm::vec3 position;
-	Cube cubes[16 * 16 * 16];
+	Cube cubes[CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE];
 };

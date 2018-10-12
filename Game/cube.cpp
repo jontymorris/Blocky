@@ -10,18 +10,24 @@ Cube::Cube(float x, float y, float z) {
 std::vector<Face> Cube::get_faces() {
 	std::vector<Face> faces;
 
+	using namespace glm;
+	vec3 verts[] = {
+		vec3(position.x + 1, position.y + 1, position.z),
+		vec3(position.x + 1, position.y, position.z),
+		vec3(position.x, position.y, position.z),
+		vec3(position.x, position.y + 1, position.z)
+	};
+	
+	vec2 texCoords[] = {
+		vec2(1, 1),
+		vec2(1, 0),
+		vec2(0, 0),
+		vec2(0, 1)
+	};
+	
 	Face front_face;
-	front_face.vertices[0] = glm::vec3(position.x + 1, position.y + 1, position.z);
-	front_face.texture_coords[0] = glm::vec2(1, 1);
-
-	front_face.vertices[1] = glm::vec3(position.x + 1, position.y, position.z);
-	front_face.texture_coords[1] = glm::vec2(1, 0);
-
-	front_face.vertices[2] = glm::vec3(position.x, position.y, position.z);
-	front_face.texture_coords[2] = glm::vec2(0, 0);
-
-	front_face.vertices[3] = glm::vec3(position.x, position.y + 1, position.z);
-	front_face.texture_coords[3] = glm::vec2(0, 1);
+	memcpy(&front_face.vertices, &verts, 4 * sizeof(vec3));
+	memcpy(&front_face.texture_coords, &texCoords, 4 * sizeof(vec2));
 
 	faces.push_back(front_face);
 

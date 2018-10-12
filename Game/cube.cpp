@@ -26,8 +26,8 @@ std::vector<Face> Cube::get_faces() {
 	};
 	
 	Face front_face;
-	memcpy(&front_face.vertices, &verts, 4 * sizeof(vec3));
-	memcpy(&front_face.texture_coords, &texCoords, 4 * sizeof(vec2));
+	memcpy(front_face.vertices, verts, 4 * sizeof(vec3));
+	memcpy(front_face.texture_coords, texCoords, 4 * sizeof(vec2));
 
 	faces.push_back(front_face);
 

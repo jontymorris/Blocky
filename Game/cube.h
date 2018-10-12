@@ -3,6 +3,8 @@
 #include <vector>
 #include "face.h"
 
+#define FACE_COUNT 1
+
 class Cube {
 public:
 	Cube();

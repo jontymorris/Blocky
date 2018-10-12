@@ -9,7 +9,10 @@ Cube::Cube(float x, float y, float z) {
 // Returns all of the cube faces
 std::vector<Face> Cube::get_faces() {
 	std::vector<Face> faces;
-
+	
+	//So it assigns the memory and copys don't happen.
+	faces.reserve(FACE_COUNT);
+	
 	using namespace glm;
 	vec3 verts[] = {
 		vec3(position.x + 1, position.y + 1, position.z),

@@ -1,8 +1,15 @@
-#include "main.h"
-
 #include <stdio.h>
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 #include "renderer.h"
 #include "game.h"
+
+const int WINDOW_WIDTH = 1280;
+const int WINDOW_HEIGHT = 720;
+
+GLFWwindow *window;
 
 int main() {
 	// Init GLFW
@@ -34,8 +41,8 @@ int main() {
 	}
 
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	glClearColor(0.3f, 0.4f, 0.5f, 1.0f);
-
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	
 	// Setup the game
 	render_setup();
 	game_setup();

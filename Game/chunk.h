@@ -4,16 +4,18 @@
 #include <glm/vec3.hpp>
 #include "cube.h"
 
-#define CHUNK_SIZE 16
+#define CHUNK_SIZE 3
+#define MAX_CUBES CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE
 
 class Chunk {
 public:
 	Chunk();
 	Chunk(int x, int y, int z);
-	void UpdateBuffers();
-	void Draw();
+	Cube cubes[CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE];
+	void update_buffers();
+	void render();
 private:
+	int indice_count;
 	unsigned int vbo, ebo;
 	glm::vec3 position;
-	Cube cubes[CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE];
 };

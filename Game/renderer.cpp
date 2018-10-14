@@ -29,6 +29,8 @@ void render_setup() {
 	glDeleteShader(vertex_shader);
 	glDeleteShader(frag_shader);
 
+	glUseProgram(shader_program);
+
 	// Textures
 	grass_texture = create_texture("grass.png");
 	
@@ -36,17 +38,14 @@ void render_setup() {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	
-	// Projection matrix
-	glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), (float)1280 / (float)720, -5.0f, 5.0f);
-	
-	unsigned int projection_location = glGetUniformLocation(shader_program, "projection");
-	glUseProgram(shader_program);
-	glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection_matrix));
+	// Clear color and depth testing
+	glClearColor(0.3f, 0.4f, 0.5f, 1.0f);
+	glEnable(GL_DEPTH_TEST);
 }
 
 // Render the game
 void render_game() {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, grass_texture);
@@ -57,6 +56,6 @@ void render_game() {
 	// draw all of the chunks
 	std::vector<Chunk> chunks = get_chunks();
 	for (int i = 0; i < chunks.size(); i++) {
-		chunks[i].Draw();
+		chunks[i].render();
 	}
 }

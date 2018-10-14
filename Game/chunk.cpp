@@ -1,8 +1,6 @@
 #include "chunk.h"
 #include <vector>
 
-int indice_count;
-
 Chunk::Chunk() : Chunk::Chunk(0, 0, 0) {};
 
 Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
@@ -24,7 +22,10 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	glGenBuffers(1, &ebo);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, MAX_CUBES*sizeof(GLfloat)*6*5*4, NULL, GL_DYNAMIC_DRAW);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned int)*MAX_CUBES, NULL, GL_DYNAMIC_DRAW);
 
 	// Vertex positon
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)0);
@@ -34,17 +35,17 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
 
-	UpdateBuffers();
+	update_buffers();
 }
 
-void Chunk::UpdateBuffers() {
+void Chunk::update_buffers() {
 	std::vector<float> vertices;
 	std::vector<unsigned int> indices;
 
 	// Loop through all of the cubes
-	for (int i = 0; i < CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE; i++) {
+	for (int i = 0; i < MAX_CUBES; i++) {
 		// Get the cube's faces
-		std::vector<Face> faces = cubes[i].get_faces();
+		std::vector<Face> faces = cubes[i].faces;
 
 		// Loop through all of the cubes faces
 		for (int j = 0; j < faces.size(); j++) {
@@ -71,15 +72,15 @@ void Chunk::UpdateBuffers() {
 	
 	// Bind the data
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices.front(), GL_DYNAMIC_DRAW);
-	
+	glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(GLfloat), &vertices.front());
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices.front(), GL_DYNAMIC_DRAW);
+	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indices.size() * sizeof(unsigned int), &indices.front());
 
 	indice_count = indices.size();
 }
 
-void Chunk::Draw() {
+void Chunk::render(){
 	// Bind buffers
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);

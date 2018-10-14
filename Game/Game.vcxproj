@@ -140,7 +140,6 @@
     <ClInclude Include="face.h" />
     <ClInclude Include="file_util.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="graphics_util.h" />
     <ClInclude Include="stb_image.h" />

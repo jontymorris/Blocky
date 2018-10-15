@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 
+#include "renderer.h"
 #include "player.h"
 #include "chunk.h"
 
@@ -12,4 +13,7 @@ public:
 
 	Game();
 	void update();
+	void render();
+private:
+	Renderer renderer;
 };

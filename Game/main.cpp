@@ -3,7 +3,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "renderer.h"
 #include "game.h"
 
 const int WINDOW_WIDTH = 1280;
@@ -41,7 +40,6 @@ int main() {
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	
 	// Setup the game
-	Renderer renderer;
 	Game game;
 	
 	// Setup the loop
@@ -64,7 +62,7 @@ int main() {
 			delta_time -= 1;
 		}
 		
-		renderer.render(game);
+		game.render();
 
 		frames += 1;
 		if (glfwGetTime() - timer >= 1.0) {

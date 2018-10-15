@@ -1,7 +1,10 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "game.h"
+#include <vector>
+
+#include "player.h"
+#include "chunk.h"
 
 class Renderer {
 public:
@@ -11,5 +14,5 @@ public:
 	glm::mat4 projection, view, model;
 	
 	Renderer();
-	void render(Game game);
+	void render(Player player, std::vector<Chunk> chunks);
 };

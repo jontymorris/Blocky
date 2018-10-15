@@ -16,3 +16,8 @@ Game::Game() {
 void Game::update() {
 	player.update();
 }
+
+// Render the game
+void Game::render() {
+	renderer.render(player, chunks);
+}

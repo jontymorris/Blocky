@@ -6,8 +6,9 @@
 
 #include "player.h"
 
-// Initialize the game
-Game::Game() {
+void Game::setup() {
+	renderer.setup();
+
 	// Create some chunks
 	chunks.push_back(Chunk(0, -10, -50));
 }

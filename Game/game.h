@@ -11,7 +11,7 @@ public:
 	Player player;
 	std::vector<Chunk> chunks;
 
-	Game();
+	void setup();
 	void update();
 	void render();
 private:

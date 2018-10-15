@@ -8,6 +8,12 @@
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
 
+Game game;
+
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+	
+}
+
 int main() {
 	// Init GLFW
 	if (!glfwInit()) {
@@ -30,6 +36,7 @@ int main() {
 
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
+	glfwSetKeyCallback(window, key_callback);
 
 	// Load OpenGL
 	if (!gladLoadGL()) {
@@ -38,10 +45,10 @@ int main() {
 	}
 
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	
+
 	// Setup the game
-	Game game;
-	
+	game.setup();
+
 	// Setup the loop
 	double fps_limit = 1.0 / 60.0;
 	double last_time = glfwGetTime();

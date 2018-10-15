@@ -13,6 +13,6 @@ public:
 	unsigned int grass_texture;
 	glm::mat4 projection, view, model;
 	
-	Renderer();
+	void setup();
 	void render(Player player, std::vector<Chunk> chunks);
 };

@@ -5,8 +5,8 @@
 
 #include "graphics_util.h"
 
-// Init the renderer
-Renderer::Renderer() {
+// Setup the renderer
+void Renderer::setup() {
 	// Create the shaders
 	unsigned int vertex_shader = create_shader(GL_VERTEX_SHADER, "shader.vert");
 	unsigned int frag_shader = create_shader(GL_FRAGMENT_SHADER, "shader.frag");
@@ -25,7 +25,7 @@ Renderer::Renderer() {
 
 	// Setup textures
 	grass_texture = create_texture("grass.png");
-	
+
 	// Generate the VAO
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -46,7 +46,7 @@ Renderer::Renderer() {
 	// Model matrix
 	glm::mat4(1.0);
 	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));
-	
+
 	// Clear color and depth testing
 	glClearColor(0.3f, 0.4f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);

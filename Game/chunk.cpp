@@ -6,7 +6,7 @@ Chunk::Chunk() : Chunk::Chunk(0, 0, 0) {};
 Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	position = glm::vec3(chunk_x, chunk_y, chunk_z);
 
-	// Generate the cubes
+	// Fill the chunk with cubes
 	int index = 0;
 	for (int cube_y = 0; cube_y < CHUNK_SIZE; cube_y++) {
 		for (int cube_x = 0; cube_x < CHUNK_SIZE; cube_x++) {
@@ -25,7 +25,7 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	glBufferData(GL_ARRAY_BUFFER, MAX_CUBES*sizeof(GLfloat)*6*5*4, NULL, GL_DYNAMIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned int)*MAX_CUBES, NULL, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, MAX_CUBES*sizeof(unsigned int)*36, NULL, GL_DYNAMIC_DRAW);
 
 	// Vertex positon
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)0);
@@ -51,6 +51,7 @@ void Chunk::update_buffers() {
 		for (int j = 0; j < faces.size(); j++) {
 			// Loop through all of the face's vertices
 			for (int k = 0; k < 4; k++) {
+				// Add the vertices to the total vertices
 				vertices.push_back(faces[j].vertices[k].x);
 				vertices.push_back(faces[j].vertices[k].y);
 				vertices.push_back(faces[j].vertices[k].z);
@@ -59,7 +60,7 @@ void Chunk::update_buffers() {
 				vertices.push_back(faces[j].texture_coords[k].y);
 			}
 
-			// Add the indices
+			// Add the indices to the total indices
 			int indice_offset = (indices.size() / 6) * 4;
 			indices.push_back(indice_offset);
 			indices.push_back(indice_offset + 1);
@@ -70,7 +71,7 @@ void Chunk::update_buffers() {
 		}
 	}
 	
-	// Bind the data
+	// Bind the new buffer data
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(GLfloat), &vertices.front());
 

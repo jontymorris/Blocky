@@ -1,12 +1,15 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <glad/glad.h>
-#include "face.h"
+#include <glm/glm.hpp>
+#include "game.h"
 
-void render_setup();
-void render_game();
-
-unsigned int create_shader(GLenum shader_type, std::string file_path);
-unsigned int get_shader_program();
+class Renderer {
+public:
+	unsigned int shader_program, vao;
+	unsigned int model_location, projection_location, view_location;
+	unsigned int grass_texture;
+	glm::mat4 projection, view, model;
+	
+	Renderer();
+	void render(Game game);
+};

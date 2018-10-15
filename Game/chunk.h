@@ -11,7 +11,7 @@ class Chunk {
 public:
 	Chunk();
 	Chunk(int x, int y, int z);
-	Cube cubes[CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE];
+	Cube cubes[MAX_CUBES];
 	void update_buffers();
 	void render();
 private:

@@ -1,10 +1,15 @@
 #pragma once
 
-#include <vector>
+#include <glm/glm.hpp>
+
+#include "player.h"
 #include "chunk.h"
 
-void game_setup();
+class Game {
+public:
+	Player player;
+	std::vector<Chunk> chunks;
 
-void game_update();
-
-std::vector<Chunk> get_chunks();
+	Game();
+	void update();
+};

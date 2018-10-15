@@ -9,8 +9,6 @@
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
 
-GLFWwindow *window;
-
 int main() {
 	// Init GLFW
 	if (!glfwInit()) {
@@ -25,7 +23,7 @@ int main() {
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	// Create the window
-	window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game", NULL, NULL);
+	GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Game", NULL, NULL);
 	if (!window) {
 		printf("Failed to create the window\n");
 		return -1;
@@ -41,33 +39,34 @@ int main() {
 	}
 
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
 	// Setup the game
-	render_setup();
-	game_setup();
+	Renderer renderer;
+	Game game;
 	
-	// Game loop
+	// Setup the loop
 	double fps_limit = 1.0 / 60.0;
 	double last_time = glfwGetTime();
 	double timer = last_time;
 	double delta_time = 0, now = 0;
 	int frames = 0, updates = 0;
 
+	// Game loop
 	while (!glfwWindowShouldClose(window)) {
 		now = glfwGetTime();
 		delta_time += (now - last_time) / fps_limit;
 		last_time = now;
 
 		while (delta_time >= 1.0) {
-			game_update();
+			game.update();
+
 			updates += 1;
 			delta_time -= 1;
 		}
 		
-		render_game();
-		frames += 1;
+		renderer.render(game);
 
+		frames += 1;
 		if (glfwGetTime() - timer >= 1.0) {
 			timer += 1;
 			//printf("FPS: %i\nUpdates: %i\n\n", frames, updates);

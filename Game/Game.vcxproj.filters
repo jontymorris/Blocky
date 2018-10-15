@@ -31,6 +31,18 @@
     <Filter Include="Header Files\game">
       <UniqueIdentifier>{1175afa9-2840-4e2b-9a79-8374834c9ea0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\game\entity">
+      <UniqueIdentifier>{f2a8cd54-3e7e-4131-9977-37cbf721e8b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\core">
+      <UniqueIdentifier>{d353dd2b-27e0-482c-b97e-cafb3bc7f2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\entity">
+      <UniqueIdentifier>{7176520a-ff98-48f6-8b92-3b0c1392fc1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\core">
+      <UniqueIdentifier>{ad1bbf19-8942-4164-9901-74b1da2ac7d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,11 +66,17 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="cube.cpp">
-      <Filter>Source Files\game</Filter>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files\game\entity</Filter>
     </ClCompile>
     <ClCompile Include="chunk.cpp">
-      <Filter>Source Files\game</Filter>
+      <Filter>Source Files\game\core</Filter>
+    </ClCompile>
+    <ClCompile Include="cube.cpp">
+      <Filter>Source Files\game\core</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files\game\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,14 +95,20 @@
     <ClInclude Include="game.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="chunk.h">
+      <Filter>Header Files\game\core</Filter>
+    </ClInclude>
     <ClInclude Include="cube.h">
-      <Filter>Header Files\game</Filter>
+      <Filter>Header Files\game\core</Filter>
     </ClInclude>
     <ClInclude Include="face.h">
-      <Filter>Header Files\game</Filter>
+      <Filter>Header Files\game\core</Filter>
     </ClInclude>
-    <ClInclude Include="chunk.h">
-      <Filter>Header Files\game</Filter>
+    <ClInclude Include="player.h">
+      <Filter>Header Files\game\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files\game\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ const int WINDOW_HEIGHT = 720;
 Game game;
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
-	
+	game.key_callback(key, action);
 }
 
 int main() {

@@ -14,6 +14,7 @@ public:
 	void setup();
 	void update();
 	void render();
+	void key_callback(int key, int action);
 private:
 	Renderer renderer;
 };

@@ -10,4 +10,11 @@ public:
 	void update();
 	glm::vec3 position;
 	Camera camera;
+
+	bool moving_foward;
+	bool moving_back;
+	bool moving_right;
+	bool moving_left;
+private:
+	float move_speed;
 };

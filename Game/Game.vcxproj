@@ -139,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="chunk.h" />
+    <ClInclude Include="constants.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="face.h" />
     <ClInclude Include="file_util.h" />

@@ -4,7 +4,7 @@
 #include <glm/vec3.hpp>
 #include "cube.h"
 
-#define CHUNK_SIZE 3
+#define CHUNK_SIZE 2
 #define MAX_CUBES CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE
 
 class Chunk {

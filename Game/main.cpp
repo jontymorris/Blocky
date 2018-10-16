@@ -1,17 +1,22 @@
-#include <stdio.h>
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "constants.h"
 #include "game.h"
-
-const int WINDOW_WIDTH = 1280;
-const int WINDOW_HEIGHT = 720;
 
 Game game;
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
+	if (key == GLFW_KEY_ESCAPE) {
+		game.running = false;
+		return;
+	}
+
 	game.key_callback(key, action);
+}
+
+void mouse_callback(GLFWwindow *window, double x_pos, double y_pos) {
+	game.mouse_callback(x_pos, y_pos);
 }
 
 int main() {
@@ -34,9 +39,12 @@ int main() {
 		return -1;
 	}
 
+	// Setup the window
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1);
+	//glfwSwapInterval(1);
 	glfwSetKeyCallback(window, key_callback);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(window, mouse_callback);
 
 	// Load OpenGL
 	if (!gladLoadGL()) {
@@ -57,7 +65,7 @@ int main() {
 	int frames = 0, updates = 0;
 
 	// Game loop
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window) && game.running) {
 		now = glfwGetTime();
 		delta_time += (now - last_time) / fps_limit;
 		last_time = now;

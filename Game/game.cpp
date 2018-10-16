@@ -1,13 +1,10 @@
 #include "game.h"
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
-
 #include "player.h"
 
 void Game::setup() {
+	running = true;
 	renderer.setup();
 
 	// Create some chunks
@@ -64,4 +61,9 @@ void Game::key_callback(int key, int action) {
 			player.moving_right = false;
 		}
 	}
+}
+
+// Handle mouse input
+void Game::mouse_callback(double x_pos, double y_pos) {
+	player.camera.mouse_update(x_pos, y_pos);
 }

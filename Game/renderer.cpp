@@ -4,6 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "graphics_util.h"
+#include "constants.h"
 
 // Setup the renderer
 void Renderer::setup() {
@@ -36,7 +37,7 @@ void Renderer::setup() {
 	model_location = glGetUniformLocation(shader_program, "model");
 
 	// Projection matrix
-	projection = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 0.1f, 100.0f);
+	projection = glm::perspective(glm::radians(45.0f), WINDOW_WIDTH/WINDOW_HEIGHT, 0.1f, 100.0f);
 	glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
 
 	// View matrix

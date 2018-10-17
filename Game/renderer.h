@@ -9,8 +9,9 @@
 class Renderer {
 public:
 	unsigned int shader_program;
-	unsigned int model_location, projection_location, view_location;
 	unsigned int grass_texture;
+
+	unsigned int model_location, projection_location, view_location;
 	glm::mat4 projection, view, model;
 	
 	void setup();

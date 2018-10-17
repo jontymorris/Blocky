@@ -63,13 +63,13 @@
     <ClCompile Include="chunk.cpp">
       <Filter>Source Files\game\core</Filter>
     </ClCompile>
-    <ClCompile Include="cube.cpp">
-      <Filter>Source Files\game\core</Filter>
-    </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>Source Files\game\core</Filter>
     </ClCompile>
     <ClCompile Include="renderer.cpp">
+      <Filter>Source Files\game\core</Filter>
+    </ClCompile>
+    <ClCompile Include="block.cpp">
       <Filter>Source Files\game\core</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,9 +89,6 @@
     <ClInclude Include="chunk.h">
       <Filter>Header Files\game\core</Filter>
     </ClInclude>
-    <ClInclude Include="cube.h">
-      <Filter>Header Files\game\core</Filter>
-    </ClInclude>
     <ClInclude Include="face.h">
       <Filter>Header Files\game\core</Filter>
     </ClInclude>
@@ -101,10 +98,13 @@
     <ClInclude Include="camera.h">
       <Filter>Header Files\game\core</Filter>
     </ClInclude>
-    <ClInclude Include="constants.h">
+    <ClInclude Include="renderer.h">
       <Filter>Header Files\game\core</Filter>
     </ClInclude>
-    <ClInclude Include="renderer.h">
+    <ClInclude Include="constants.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="block.h">
       <Filter>Header Files\game\core</Filter>
     </ClInclude>
   </ItemGroup>

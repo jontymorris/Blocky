@@ -5,7 +5,13 @@
 
 #define VERT_COUNT 4
 
+enum FaceSide {
+	Top, Bottom, Left, Right, Front, Back
+};
+
 struct Face {
+	FaceSide face_side;
+
 	glm::vec3 *vertices;
 	glm::vec2 *texture_coords;
 	

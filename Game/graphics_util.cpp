@@ -3,7 +3,7 @@
 #include "stb_image.h"
 
 // Creates a texture and returns the id
-unsigned int create_texture(std::string file_path) {
+unsigned int create_texture(const char * file_path) {
 	unsigned int texture_id;
 	glGenTextures(1, &texture_id);
 	glBindTexture(GL_TEXTURE_2D, texture_id);
@@ -15,10 +15,10 @@ unsigned int create_texture(std::string file_path) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	int width, height, nr_channels;
-	unsigned char *data = stbi_load("grass.png", &width, &height, &nr_channels, 0);
+	unsigned char *data = stbi_load(file_path, &width, &height, &nr_channels, 0);
 
 	if (!data) {
-		printf("Failed to load in texture %s\n", file_path.c_str());
+		printf("Failed to load in texture %s\n", file_path);
 	}
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -30,7 +30,7 @@ unsigned int create_texture(std::string file_path) {
 }
 
 // Creates a shader and returns the shader id
-unsigned int create_shader(GLenum shader_type, std::string file_path) {
+unsigned int create_shader(GLenum shader_type, const char * file_path) {
 	unsigned int shader_id = glCreateShader(shader_type);
 
 	std::string shader_content = read_file(file_path);

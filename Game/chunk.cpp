@@ -17,6 +17,10 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 		}
 	}
 
+	// Generate the VAO
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
 	// Create the buffers
 	glGenBuffers(1, &vbo);
 	glGenBuffers(1, &ebo);
@@ -71,20 +75,17 @@ void Chunk::update_buffers() {
 		}
 	}
 	
-	// Bind the new buffer data
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(GLfloat), &vertices.front());
+	glBindVertexArray(vao);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	// Bind the new buffer data
+	glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(GLfloat), &vertices.front());
 	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indices.size() * sizeof(unsigned int), &indices.front());
 
 	indice_count = indices.size();
 }
 
 void Chunk::render(){
-	// Bind buffers
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBindVertexArray(vao);
 
 	// Draw bound data
 	glDrawElements(GL_TRIANGLES, indice_count, GL_UNSIGNED_INT, 0);

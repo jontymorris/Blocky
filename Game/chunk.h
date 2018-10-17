@@ -4,7 +4,7 @@
 #include <glm/vec3.hpp>
 #include "cube.h"
 
-#define CHUNK_SIZE 2
+#define CHUNK_SIZE 8
 #define MAX_CUBES CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE
 
 class Chunk {
@@ -16,6 +16,6 @@ public:
 	void render();
 private:
 	int indice_count;
-	unsigned int vbo, ebo;
+	unsigned int vao, vbo, ebo;
 	glm::vec3 position;
 };

@@ -26,11 +26,7 @@ void Renderer::setup() {
 
 	// Setup textures
 	grass_texture = create_texture("grass.png");
-
-	// Generate the VAO
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
+	
 	// Locate the matrices
 	projection_location = glGetUniformLocation(shader_program, "projection");
 	view_location = glGetUniformLocation(shader_program, "view");
@@ -48,9 +44,10 @@ void Renderer::setup() {
 	glm::mat4(1.0);
 	glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));
 
-	// Clear color and depth testing
+	// Other
 	glClearColor(0.3f, 0.4f, 0.5f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
 }
 
 // Render the game
@@ -61,9 +58,8 @@ void Renderer::render(Player player, std::vector<Chunk> chunks) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, grass_texture);
 
-	// Bind the shader program and VAO
+	// Bind the shader program
 	glUseProgram(shader_program);
-	glBindVertexArray(vao);
 	
 	// Update the camera position
 	view = glm::lookAt(player.camera.position, player.camera.position + player.camera.front, player.camera.up);

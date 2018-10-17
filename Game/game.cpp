@@ -8,7 +8,8 @@ void Game::setup() {
 	renderer.setup();
 
 	// Create some chunks
-	chunks.push_back(Chunk(0, -6, -10));
+	chunks.push_back(Chunk(12, -12, 0));
+	chunks.push_back(Chunk(0, -12, 0));
 }
 
 // Game update

@@ -8,7 +8,7 @@
 
 class Renderer {
 public:
-	unsigned int shader_program, vao;
+	unsigned int shader_program;
 	unsigned int model_location, projection_location, view_location;
 	unsigned int grass_texture;
 	glm::mat4 projection, view, model;

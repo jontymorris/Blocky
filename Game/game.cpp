@@ -8,7 +8,7 @@ void Game::setup() {
 	renderer.setup();
 
 	// Create some chunks
-	chunks.push_back(Chunk(5, -1, -1));
+	chunks.push_back(Chunk(5, -6, -1));
 	chunks.push_back(Chunk(0, -6, 0));
 }
 
@@ -24,6 +24,7 @@ void Game::render() {
 
 // Handle key input
 void Game::key_callback(int key, int action) {
+	// Foward
 	if (key == GLFW_KEY_W) {
 		if (action == GLFW_PRESS) {
 			player.moving_foward = true;
@@ -33,6 +34,7 @@ void Game::key_callback(int key, int action) {
 		}
 	}
 
+	// Back
 	else if (key == GLFW_KEY_S) {
 		if (action == GLFW_PRESS) {
 			player.moving_back = true;
@@ -43,6 +45,7 @@ void Game::key_callback(int key, int action) {
 		}
 	}
 
+	// Left
 	else if (key == GLFW_KEY_A) {
 		if (action == GLFW_PRESS) {
 			player.moving_left = true;
@@ -53,6 +56,7 @@ void Game::key_callback(int key, int action) {
 		}
 	}
 
+	// Right
 	else if (key == GLFW_KEY_D) {
 		if (action == GLFW_PRESS) {
 			player.moving_right = true;
@@ -66,5 +70,5 @@ void Game::key_callback(int key, int action) {
 
 // Handle mouse input
 void Game::mouse_callback(double x_pos, double y_pos) {
-	player.camera.mouse_update(x_pos, y_pos);
+	player.camera.mouse_move(x_pos, y_pos);
 }

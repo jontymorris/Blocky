@@ -4,8 +4,7 @@
 #include "constants.h"
 
 Camera::Camera() {
-	position = glm::vec3(0, 0, 3);
-	front = glm::vec3(0, 0, -1);
+	position = glm::vec3(0, 0, 0);
 	up = glm::vec3(0, 1, 0);
 
 	mouse_sensitivity = 0.05f;
@@ -13,10 +12,11 @@ Camera::Camera() {
 	last_x = WINDOW_WIDTH / 2;
 	last_y = WINDOW_HEIGHT / 2;
 
+	update();
 	first_move = true;
 }
 
-void Camera::mouse_update(float x_pos, float y_pos) {
+void Camera::mouse_move(float x_pos, float y_pos) {
 	if (first_move)
 	{
 		last_x = x_pos;
@@ -26,6 +26,7 @@ void Camera::mouse_update(float x_pos, float y_pos) {
 
 	float x_offset = x_pos - last_x;
 	float y_offset = y_pos - last_y;
+
 	last_x = x_pos;
 	last_y = y_pos;
 
@@ -35,6 +36,10 @@ void Camera::mouse_update(float x_pos, float y_pos) {
 	yaw += x_offset;
 	pitch -= y_offset;
 
+	update();
+}
+
+void Camera::update() {
 	if (pitch > 89.0f)
 		pitch = 89.0f;
 	if (pitch < -89.0f)

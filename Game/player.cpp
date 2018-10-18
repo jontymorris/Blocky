@@ -10,7 +10,7 @@ Player::Player(int x, int y, int z) {
 }
 
 void Player::update() {
-	// Move the player
+	// Move foward
 	if (moving_foward) {
 		position += camera.front_locked * move_speed;
 	}
@@ -18,6 +18,7 @@ void Player::update() {
 		position -= camera.front_locked * move_speed;
 	}
 
+	// Move horizontally
 	if (moving_right) {
 		position += glm::normalize(glm::cross(camera.front_locked, camera.up)) * move_speed;
 	}

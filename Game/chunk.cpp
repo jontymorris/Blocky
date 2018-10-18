@@ -7,6 +7,13 @@ Chunk::Chunk() : Chunk::Chunk(0, 0, 0) {};
 Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	chunk_position = glm::vec3(chunk_x, chunk_y, chunk_z);
 
+	is_setup = false;
+
+	vao = 0;
+	vbo = 0;
+	ebo = 0;
+	indice_count = 0;
+
 	// Fill the chunk with cubes
 	int index = 0;
 	for (int cube_y = 0; cube_y < CHUNK_SIZE; cube_y++) {
@@ -18,6 +25,12 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 		}
 	}
 
+	generate_vertices();
+}
+
+void Chunk::setup() {
+	is_setup = true;
+
 	// Generate the VAO
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -27,10 +40,10 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	glGenBuffers(1, &ebo);
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, MAX_BLOCKS*sizeof(GLfloat)*6*5*4, NULL, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, MAX_BLOCKS * sizeof(GLfloat) * 6 * 5 * 4, NULL, GL_DYNAMIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, MAX_BLOCKS*sizeof(unsigned int)*36, NULL, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, MAX_BLOCKS * sizeof(unsigned int) * 36, NULL, GL_DYNAMIC_DRAW);
 
 	// Vertex positon
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)0);
@@ -39,13 +52,12 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	// Texture coordinate
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
-
-	update_buffers();
 }
 
-void Chunk::update_buffers() {
-	std::vector<float> vertices;
-	std::vector<unsigned int> indices;
+void Chunk::generate_vertices() {
+	should_rebuffer = true;
+	vertices = std::vector<float>();
+	indices = std::vector<unsigned int>();
 
 	// Loop through all of the cubes
 	for (int i = 0; i < MAX_BLOCKS; i++) {
@@ -53,7 +65,7 @@ void Chunk::update_buffers() {
 		if (blocks[i].material == Air) {
 			continue;
 		}
-		
+
 		// Detect the surrounding blocks
 		std::map<FaceSide, bool> block_present;
 		block_present[Top] = is_block_present(blocks[i].position + glm::vec3(0, 1, 0));
@@ -62,7 +74,7 @@ void Chunk::update_buffers() {
 		block_present[Right] = is_block_present(blocks[i].position + glm::vec3(1, 0, 0));
 		block_present[Front] = is_block_present(blocks[i].position + glm::vec3(0, 0, -1));
 		block_present[Back] = is_block_present(blocks[i].position + glm::vec3(0, 0, 1));
-		
+
 		// Get the cube's faces
 		std::vector<Face> faces = blocks[i].faces;
 
@@ -94,7 +106,11 @@ void Chunk::update_buffers() {
 			indices.push_back(indice_offset + 3);
 		}
 	}
-	
+}
+
+void Chunk::update_buffers() {
+	should_rebuffer = false;
+
 	glBindVertexArray(vao);
 
 	// Bind the new buffer data
@@ -105,9 +121,16 @@ void Chunk::update_buffers() {
 }
 
 void Chunk::render(){
-	glBindVertexArray(vao);
+	if (!is_setup) {
+		setup();
+	}
+
+	if (should_rebuffer) {
+		update_buffers();
+	}
 
 	// Draw bound data
+	glBindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, indice_count, GL_UNSIGNED_INT, 0);
 }
 

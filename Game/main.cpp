@@ -84,13 +84,21 @@ int main() {
 		frames += 1;
 		if (glfwGetTime() - timer >= 1.0) {
 			timer += 1;
-			//printf("FPS: %i\nUpdates: %i\n\n", frames, updates);
+			printf("FPS: %i\nUpdates: %i\n\n", frames, updates);
 			updates = 0;
 			frames = 0;
 		}
 
 		glfwPollEvents();
 		glfwSwapBuffers(window);
+
+		int error = glGetError();
+		if (error != 0) {
+			printf("ERROR! %i\n", error);
+			if (error == GL_OUT_OF_MEMORY) {
+				printf("Out of memory\n");
+			}
+		}
 	}
 
 	glfwTerminate();

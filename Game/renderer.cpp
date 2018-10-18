@@ -5,6 +5,7 @@
 
 #include "graphics_util.h"
 #include "constants.h"
+#include "game.h"
 
 // Setup the renderer
 void Renderer::setup() {
@@ -53,7 +54,7 @@ void Renderer::setup() {
 }
 
 // Render the game
-void Renderer::render(Player player, std::vector<Chunk> chunks) {
+void Renderer::render(Game *game) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Bind the textures
@@ -64,11 +65,13 @@ void Renderer::render(Player player, std::vector<Chunk> chunks) {
 	glUseProgram(shader_program);
 	
 	// Update the camera position
-	view = glm::lookAt(player.camera.position, player.camera.position + player.camera.front, player.camera.up);
+	view = glm::lookAt(game->player.camera.position, game->player.camera.position + game->player.camera.front, game->player.camera.up);
 	glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
 
 	// Draw all of the chunks
-	for (unsigned int i = 0; i < chunks.size(); i++) {
-		chunks[i].render();
+	game->chunks_mutex.lock();
+	for (unsigned int i = 0; i < game->chunks.size(); i++) {
+		game->chunks[i].render();
 	}
+	game->chunks_mutex.unlock();
 }

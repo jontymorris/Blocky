@@ -1,15 +1,29 @@
 #include "game.h"
 
 #include <GLFW/glfw3.h>
-#include "player.h"
+
+Game::~Game() {
+	chunks_thread.join();
+}
 
 void Game::setup() {
 	running = true;
 	renderer.setup();
 
+	chunks_thread = std::thread(&Game::create_chunks, this);
+}
+
+void Game::create_chunks() {
 	// Create some chunks
-	chunks.push_back(Chunk(5, -6, -1));
-	chunks.push_back(Chunk(0, -6, 0));
+	for (int x = 0; x < 5; x++) {
+		for (int z = 0; z < 5; z++) {
+			Chunk new_chunk = Chunk(x*CHUNK_SIZE, -CHUNK_SIZE - 1, z*CHUNK_SIZE);
+			
+			chunks_mutex.lock();
+			chunks.push_back(new_chunk);
+			chunks_mutex.unlock();
+		}
+	}
 }
 
 // Game update
@@ -19,7 +33,7 @@ void Game::update() {
 
 // Render the game
 void Game::render() {
-	renderer.render(player, chunks);
+	renderer.render(this);
 }
 
 // Handle key input

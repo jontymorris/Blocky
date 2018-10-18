@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 #include <glm/vec3.hpp>
+#include <vector>
 #include "block.h"
 
 #define CHUNK_SIZE 4
@@ -15,13 +16,19 @@ public:
 	Chunk();
 	Chunk(int x, int y, int z);
 
-	void update_buffers();
 	void render();
 private:
+	glm::vec3 chunk_position;
+	
 	int indice_count;
+	bool should_rebuffer, is_setup;
+	std::vector<float> vertices;
+	std::vector<unsigned int> indices;
 	unsigned int vao, vbo, ebo;
 
-	glm::vec3 chunk_position;
+	void setup();
+	void generate_vertices();
+	void update_buffers();
 
 	bool is_block_present(glm::vec3 position);
 };

@@ -6,6 +6,8 @@
 #include "player.h"
 #include "chunk.h"
 
+#define RENDER_DISTANCE 50
+
 class Game;
 
 class Renderer {

@@ -7,12 +7,11 @@ Chunk::Chunk() : Chunk::Chunk(0, 0, 0) {};
 Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	chunk_position = glm::vec3(chunk_x, chunk_y, chunk_z);
 
-	is_setup = false;
-
 	vao = 0;
 	vbo = 0;
 	ebo = 0;
 	indice_count = 0;
+	is_setup = false;
 
 	// Fill the chunk with cubes
 	int index = 0;

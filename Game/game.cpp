@@ -15,9 +15,9 @@ void Game::setup() {
 
 void Game::create_chunks() {
 	// Create some chunks
-	for (int x = 0; x < 5; x++) {
-		for (int z = 0; z < 5; z++) {
-			Chunk new_chunk = Chunk(x*CHUNK_SIZE, -CHUNK_SIZE - 1, z*CHUNK_SIZE);
+	for (int x = -5*CHUNK_SIZE; x < 10; x++) {
+		for (int z = -5*CHUNK_SIZE; z < 10; z++) {
+			Chunk new_chunk(x*CHUNK_SIZE, -CHUNK_SIZE-2, z*CHUNK_SIZE);
 			
 			chunks_mutex.lock();
 			chunks.push_back(new_chunk);

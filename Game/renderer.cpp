@@ -71,7 +71,14 @@ void Renderer::render(Game *game) {
 	// Draw all of the chunks
 	game->chunks_mutex.lock();
 	for (unsigned int i = 0; i < game->chunks.size(); i++) {
-		game->chunks[i].render();
+		float delta_x = abs(game->chunks[i].chunk_position.x - game->player.position.x);
+		float delta_z = abs(game->chunks[i].chunk_position.z - game->player.position.z);
+		float delta_y = abs(game->chunks[i].chunk_position.y - game->player.position.y);
+		float distance = sqrt(pow(delta_x, 2) + pow(delta_z, 2) + pow(delta_y, 2));
+
+		if (distance < RENDER_DISTANCE) {
+			game->chunks[i].render();
+		}
 	}
 	game->chunks_mutex.unlock();
 }

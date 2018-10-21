@@ -11,22 +11,21 @@
 
 class Chunk {
 public:
+	glm::vec3 chunk_position;
 	Block blocks[MAX_BLOCKS];
 
 	Chunk();
 	Chunk(int x, int y, int z);
 
+	void setup();
 	void render();
 private:
-	glm::vec3 chunk_position;
-	
-	int indice_count;
 	bool should_rebuffer, is_setup;
+	int indice_count;
 	std::vector<float> vertices;
 	std::vector<unsigned int> indices;
 	unsigned int vao, vbo, ebo;
 
-	void setup();
 	void generate_vertices();
 	void update_buffers();
 

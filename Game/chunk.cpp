@@ -18,7 +18,7 @@ Chunk::Chunk(int chunk_x, int chunk_y, int chunk_z) {
 	for (int cube_y = 0; cube_y < CHUNK_SIZE; cube_y++) {
 		for (int cube_x = 0; cube_x < CHUNK_SIZE; cube_x++) {
 			for (int cube_z = 0; cube_z < CHUNK_SIZE; cube_z++) {
-				blocks[index] = Block(chunk_x + cube_x, chunk_y + cube_y, chunk_z + cube_z, Grass);
+				blocks[index] = Block(glm::vec3(chunk_x + cube_x, chunk_y + cube_y, chunk_z + cube_z), Grass);
 				index += 1;
 			}	
 		}

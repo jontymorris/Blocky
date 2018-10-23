@@ -1,9 +1,9 @@
 #include "block.h"
 
-Block::Block() : Block::Block(0, 0, 0, Grass) {}
+Block::Block() : Block::Block(glm::vec3(), Grass) {}
 
-Block::Block(int x, int y, int z, BlockMaterial material) {
-	position = glm::vec3(x, y, z);
+Block::Block(glm::vec3 position, BlockMaterial material) {
+	Block::position = position;
 	Block::material = material;
 	
 	faces.reserve(FACE_COUNT);

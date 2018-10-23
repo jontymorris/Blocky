@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <glm/vec3.hpp>
 #include "face.h"
 
 #define FACE_COUNT 6
@@ -19,5 +20,5 @@ public:
 	std::vector<Face> faces;
 
 	Block();
-	Block(int x, int y, int z, BlockMaterial material);
+	Block(glm::vec3 position, BlockMaterial material);
 };

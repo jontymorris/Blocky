@@ -1,14 +1,14 @@
-#include "renderer.h"
+#include "game.h"
 #include "window.h"
 #include <iostream>
 
+Game game;
 Window window;
-Renderer renderer;
 
 // Setup the game
 void init() {
 	window.init();
-	renderer.init();
+	game.init();
 }
 
 // Game loop
@@ -21,7 +21,12 @@ void loop() {
 	int frames = 0;
 	int updates = 0;
 	
-	while (!window.shouldWindowClose()) {
+	while (game.isRunning) {
+		// should the game close?
+		if (window.shouldWindowClose()) {
+			game.isRunning = false;
+		}
+		
 		// refresh timers
 		now = window.getTime();
 		delta += (now - last) / updateLimit;
@@ -32,13 +37,13 @@ void loop() {
 		// update
 		while (delta >= 1.0) {
 			updates++;
+			game.update();
 			delta--;
 		}
 		
 		// render
 		frames++;
-		renderer.clear();
-		renderer.checkError();
+		game.render();
 		window.swapBuffers();
 		
 		// one second interval
@@ -53,6 +58,7 @@ void loop() {
 
 // Close the game
 void close() {
+	game.close();
 	window.close();
 }
 
@@ -63,6 +69,5 @@ int main() {
 	loop();
 	close();
 	
-	std::cout << "Game closed" << std::endl;
 	return 0;
 }

@@ -18,6 +18,10 @@
       <File Name="shader.frag"/>
       <File Name="shader.vert"/>
     </VirtualDirectory>
+    <VirtualDirectory Name="core">
+      <File Name="game.h"/>
+      <File Name="game.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

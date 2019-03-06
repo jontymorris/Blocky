@@ -1,5 +1,6 @@
 # CodeLite files
 Debug/
+.codelite/
 
 # Prerequisites
 *.d

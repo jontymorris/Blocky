@@ -52,14 +52,6 @@ void Renderer::clear() {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-// Draw the game
-void Renderer::draw() {
-	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO);
-	
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-}
-
 // Checks if there were any errors
 void Renderer::checkError() {
 	int error = glGetError();

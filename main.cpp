@@ -15,7 +15,6 @@ int main() {
 		window.pollEvents();
 		
 		renderer.clear();
-		renderer.draw();
 		
 		window.swapBuffers();
 		renderer.checkError();

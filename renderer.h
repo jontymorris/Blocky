@@ -7,7 +7,6 @@ public:
 	
 	void init();
 	void clear();
-	void draw();
 	void checkError();
 private:
 	void setupShaderProgram();

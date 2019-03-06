@@ -8,7 +8,8 @@ public:
 
 	void init();
 	void close();
-	bool shouldWindowClose();
 	void pollEvents();
 	void swapBuffers();
+	bool shouldWindowClose();
+	double getTime();
 };

@@ -22,6 +22,7 @@ void Window::init() {
 		std::cout << "Failed to create window" << std::endl;
 	}
 	
+	glfwSwapInterval(1);
 	glfwMakeContextCurrent(window);
 }
 
@@ -29,11 +30,6 @@ void Window::init() {
 void Window::close() {
 	glfwDestroyWindow(window);
 	glfwTerminate();
-}
-
-// Checks if the window should close
-bool Window::shouldWindowClose() {
-	return glfwWindowShouldClose(window);
 }
 
 // Poll the GLFW events
@@ -44,4 +40,14 @@ void Window::pollEvents() {
 // Swap the window buffers
 void Window::swapBuffers() {
 	glfwSwapBuffers(window);
+}
+
+// Checks if the window should close
+bool Window::shouldWindowClose() {
+	return glfwWindowShouldClose(window);
+}
+
+// Returns the time in mills
+double Window::getTime() {
+	return glfwGetTime();
 }

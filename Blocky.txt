@@ -1,0 +1,1 @@
+./Debug/main.cpp.o ./Debug/window.cpp.o ./Debug/renderer.cpp.o ./Debug/up_up_Libraries_glad_src_glad.c.o

@@ -11,7 +11,7 @@ void Renderer::init() {
 	
 	// get OpenGL ready for use
 	glViewport(0, 0, 1280, 720);
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClearColor(0.1f, 0.5f, 0.7f, 1.0f);
 	
 	setupShaderProgram();
 }

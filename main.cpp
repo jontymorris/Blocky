@@ -5,12 +5,14 @@
 Window window;
 Renderer renderer;
 
-int main() {
-	std::cout << "Game running..." << std::endl;
-	
+// Setup the game
+void init() {
 	window.init();
 	renderer.init();
-	
+}
+
+// Game loop
+void loop() {
 	while (!window.shouldWindowClose()) {
 		window.pollEvents();
 		
@@ -19,6 +21,19 @@ int main() {
 		window.swapBuffers();
 		renderer.checkError();
 	}
+}
+
+// Close the game
+void close() {
+	window.close();
+}
+
+int main() {
+	std::cout << "Game running..." << std::endl;
+	
+	init();
+	loop();
+	close();
 	
 	std::cout << "Game closed" << std::endl;
 	return 0;

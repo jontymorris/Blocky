@@ -52,6 +52,12 @@ void Renderer::clear() {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+
+// Render the world
+void Renderer::renderWorld(const World world) {
+	
+}
+
 // Checks if there were any errors
 void Renderer::checkError() {
 	int error = glGetError();

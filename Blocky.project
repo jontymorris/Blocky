@@ -10,17 +10,24 @@
       <File Name="renderer.h"/>
       <File Name="renderer.cpp"/>
       <File Name="../../Libraries/glad/src/glad.c"/>
+      <VirtualDirectory Name="shaders">
+        <File Name="shader.frag"/>
+        <File Name="shader.vert"/>
+      </VirtualDirectory>
     </VirtualDirectory>
     <VirtualDirectory Name="util">
       <File Name="file_util.h"/>
     </VirtualDirectory>
-    <VirtualDirectory Name="shaders">
-      <File Name="shader.frag"/>
-      <File Name="shader.vert"/>
-    </VirtualDirectory>
     <VirtualDirectory Name="core">
       <File Name="game.h"/>
       <File Name="game.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="world">
+      <File Name="world.h"/>
+      <File Name="world.cpp"/>
+      <File Name="chunk.h"/>
+      <File Name="chunk.cpp"/>
+      <File Name="block.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">

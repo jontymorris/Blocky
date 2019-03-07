@@ -1,3 +1,6 @@
+#pragma once
+
+#include "world.h"
 #include <glad/glad.h>
 #include <string>
 
@@ -7,6 +10,7 @@ public:
 	
 	void init();
 	void clear();
+	void renderWorld(const World world);
 	void checkError();
 private:
 	void setupShaderProgram();

@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/window.cpp$(ObjectSuffix) $(IntermediateDirectory)/renderer.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Libraries_glad_src_glad.c$(ObjectSuffix) $(IntermediateDirectory)/game.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/window.cpp$(ObjectSuffix) $(IntermediateDirectory)/renderer.cpp$(ObjectSuffix) $(IntermediateDirectory)/up_up_Libraries_glad_src_glad.c$(ObjectSuffix) $(IntermediateDirectory)/game.cpp$(ObjectSuffix) $(IntermediateDirectory)/world.cpp$(ObjectSuffix) $(IntermediateDirectory)/chunk.cpp$(ObjectSuffix) 
 
 
 
@@ -130,6 +130,22 @@ $(IntermediateDirectory)/game.cpp$(DependSuffix): game.cpp
 
 $(IntermediateDirectory)/game.cpp$(PreprocessSuffix): game.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/game.cpp$(PreprocessSuffix) game.cpp
+
+$(IntermediateDirectory)/world.cpp$(ObjectSuffix): world.cpp $(IntermediateDirectory)/world.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/mnt/Code/Games/Blocky/world.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/world.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/world.cpp$(DependSuffix): world.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/world.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/world.cpp$(DependSuffix) -MM world.cpp
+
+$(IntermediateDirectory)/world.cpp$(PreprocessSuffix): world.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/world.cpp$(PreprocessSuffix) world.cpp
+
+$(IntermediateDirectory)/chunk.cpp$(ObjectSuffix): chunk.cpp $(IntermediateDirectory)/chunk.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/mnt/Code/Games/Blocky/chunk.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/chunk.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/chunk.cpp$(DependSuffix): chunk.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/chunk.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/chunk.cpp$(DependSuffix) -MM chunk.cpp
+
+$(IntermediateDirectory)/chunk.cpp$(PreprocessSuffix): chunk.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/chunk.cpp$(PreprocessSuffix) chunk.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
